@@ -1,17 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import App from './App';
-import Demo from './Demo';
+import Login from './views/Login';
+import Chat from './views/Chat';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import socketIO from 'socket.io-client';
+const socket = socketIO.connect('http://localhost:4000');
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <BrowserRouter>
     <Routes>
-      <Route path='/' element={<App />}/>
-      <Route path='/demo' element={<Demo />} />
+      <Route path='/' element={<Login socket={socket} />} />
+      <Route path='/chat' element={<Chat socket={socket} />} />
       <Route
         path="*"
         element={
